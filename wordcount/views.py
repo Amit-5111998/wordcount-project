@@ -1,12 +1,28 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+import operator
 
-def  home(request):
-    return render(request,'home.html',{'hello':'there'})
-def fun1(request):
-    return HttpResponse('Welcome to my homepage')
+def homepage(request):
+    return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
+
 def count(request):
-    an1=request.GET['inp1']
-    an2=request.GET['inp2']
-    ans1=an1+an2
-    return render(request,'count.html',{'ans':ans1},{'ana':an1})
+    fulltext = request.GET['fulltext']
+
+    wordlist = fulltext.split()
+
+    worddictionary = {}
+
+    for word in wordlist:
+        if word in worddictionary:
+            #Increase
+            worddictionary[word] += 1
+        else:
+            #add to the dictionary
+            worddictionary[word] = 1
+
+    sortedwords = sorted(worddictionary.items(), key=operator.itemgetter(1), reverse=True)
+
+    return render(request, 'count.html',{'fulltext':fulltext,'count':len(wordlist),'sortedwords':sortedwords})
