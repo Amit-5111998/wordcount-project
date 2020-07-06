@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        {{hello}}
+        <h1>Hey There this is amit</h1>
+        <form action="{% url 'count'%}">
+            <textarea cols="50" rows="20" name="fulltext"></textarea>
+            <input type="text" name="inp1"></input>
+            <input type="text" name="inp2"></input>
+
+            <br />
+            <input type="submit" value="count!"/>
+        </form>
+    </body>
+</html>
